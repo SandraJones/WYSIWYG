@@ -5,3 +5,17 @@ img {
 section {
     text-align: justify;
 }
+/*
+*/
+.card {
+	margin: 2%;
+  padding: 1%;
+  float: left;
+}
+/*this defines the person tag so it won't default*/
+.card:nth-of-type(odd) {
+	background: lightblue;
+}
+.card:nth-of-type(even) {
+	background: yellow;
+}

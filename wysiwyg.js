@@ -62,9 +62,23 @@ for (let i = 0; i < people.length; i++) {
 }
 
 function buildCard(person) {
-  container.innerHTML += `<person class="card"><header>${person.title} ${person.name} </header><section>${person.bio}<img src="${person.image}"></section><footer>${person.lifespan.birth} - ${person.lifespan.death}</footer>` //targeting title property in object     
-}
+  container.innerHTML += `<person class="card"><header>${person.title} ${person.name} </header><section>${person.bio}<img src="${person.image}"></section><footer>${person.lifespan.birth}-${person.lifespan.death}</footer></person>` 
+};
 
+  	//targeting title property in object     
+
+// function makeYellow() {
+// 	for (let i=0; i < person.length; i++) {
+// 		if (person[i] === 2*i % 2) {
+// 			then //background is yellow
+// 		}	else 
+// 		    //background is light blue
+//  	}
+// }
+
+
+
+card.addEventListener("keyup", buildCard);
 
 //HAVE THIS DONE BY SATURDAY
 //event listeners

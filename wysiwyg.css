@@ -19,3 +19,6 @@ section {
 .card:nth-of-type(even) {
 	background: yellow;
 }
+.selected {
+	border: 1px dotted gold;
+}

@@ -46,26 +46,69 @@ let people = [
 let container = document.getElementById("container");
 let input = document.getElementById("input");
 let card = document.getElementsByClassName("card");
+let bio = document.getElementsByClassName("bio");
 //now we will populate the dom by making cards. it will come back as an array
 
 console.log("card", card);
 // so we need to cycle thru the for loop 
 
 
-for (let i = 0; i < people.length; i++) {
-  //print this straight to the DOM, so page is pulled up and see cards immediately
-  let person = people[i];
-  console.log("person",person);
-  //as we go thru the function we are going to build one card at a time
-  buildCard(person);
-
+function populateDOM() {
+	for (let i = 0; i < people.length; i++) {
+	  //print this straight to the DOM, so page is pulled up and see cards immediately
+	  let person = people[i];
+	  //as we go thru the function we are going to build one card at a time
+	  buildCard(person);
+	  } 
+	addClickEvent();
 }
 
 function buildCard(person) {
-  container.innerHTML += `<person class="card"><header>${person.title} ${person.name} </header><section>${person.bio}<img src="${person.image}"></section><footer>${person.lifespan.birth}-${person.lifespan.death}</footer></person>` 
+  container.innerHTML += `<person class="card"><header>${person.title} ${person.name} </header><section><p class="bio">${person.bio}</p><img src="${person.image}"></section><footer>${person.lifespan.birth}-${person.lifespan.death}</footer></person>` 
 };
 
-  	//targeting title property in object     
+
+function addClickEvent(currentCard) {
+	//need to create a border and focus on input when border is clicked(
+			for (let i=0; i<card.length; i++) {
+				let currentCard = card[i];
+				let currentBio = bio[i];
+			  currentCard.addEventListener("click", function() {
+			    removeSelected();
+			    input.value = "";
+			    input.focus();
+			    currentCard.classList.add("selected"); 
+			    keyEvent(currentCard, currentBio);
+		  	});  
+  		}
+}
+//we only want to have one card selected at a time, so:
+function removeSelected(){
+	for (let i=0; i<card.length; i++) {
+    card[i].classList.remove("selected");
+  }
+}
+//when user clicks on a card
+function keyEvent(currentCard, currentBio){
+  input.addEventListener("keyup", function(event) {
+  	//if returns a boolean, so check if currentCard
+    if (currentCard.classList.contains("selected")) {
+    	let newBio = event.currentTarget.value;
+      currentBio.innerHTML = newBio; 
+      if (event.keyCode === 13) {
+      	 currentBio.innerHTML = newBio;
+         input.value = "";
+      }   
+    }
+  });
+}
+
+
+//event.target ect  properties on the event object
+
+
+populateDOM();
+
 
 // function makeYellow() {
 // 	for (let i=0; i < person.length; i++) {
@@ -77,58 +120,3 @@ function buildCard(person) {
 // }
 
 
-
-card.addEventListener("keyup", buildCard);
-
-//HAVE THIS DONE BY SATURDAY
-//event listeners
-//css to style photos
-
-
-
-
-
-
-
-// CLASS
-//create dom element inside container means create a card
-
-// EVENT LISTENERS
-//keyup in the input field  will bind to the card or mirror on the card and when you type it will show up on the card. bio is only thing that will change
-//enter  in the input field
-//click for border on card (dotted and gain focus)
-
-
-//CSS
-// yellow and blue
-//border, dotted
-
-//element called <person>}
-// Create an array of objects that represents famous people (see structure below).
-// Create a text input in your DOM.
-// Beneath that, create a container, block element in your DOM.
-// Create a DOM element for each of the objects inside the container.
-// Style your person elements however you like.
-// For every even numbered element, have a light yellow background.
-// For every odd numbered element, have a light blue background.
-// Each element's DOM structure should be as shown below.
-// When you click on one of the person elements, a dotted border 
-// should appear around it.
-// When you click on one of the person elements, the text input should 
-// immediately gain focus so that you can start typing.means when you click on a card, a cursor shows up use .focus()
-// When there is a highlighted person element, and you begin 
-// typing in the input box, the person's biography should be 
-// immediately bound to what you are typing, letter by letter. this is the mirroring we want
-// When you press the enter/return key when typing in the input 
-// field, then the content of the input field should immediately be blank.
-
-
-// VAR
-// Create an array of objects that represents famous people (see structure below).
-
-
-// <person>
-// 	  <header>Name and title go here</header>
-// 	  <section>Bio and image go here</section>
-// 	  <footer>Lifespan info goes here</footer>
-// 	</person>
